@@ -1,10 +1,11 @@
 // Name: derek_LED.cpp
+// Modify from the original derek_LED.cpp
 // This file contains the implementation code for the derek_LED.h (from the makeLEDs.cpp)
 
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <sstream>
+#include <unistd.h>
 #include "derek_LED.h"
 
 using namespace std;
@@ -55,11 +56,27 @@ void LED::flash(string delayms = "50")
 void LED::outputState()
 {
 	   ifstream fs;
-	      fs.open( (path + "/trigger").c_str());
-	         string line;
-		    while(getline(fs,line)) cout << line << endl;
-		       fs.close();
+	   fs.open( (path + "/trigger").c_str());
+	   string line;
+	   while(getline(fs,line)) cout << line << endl;
+	   fs.close();
 }
+
+void LED::blink(int num)
+{
+	cout<<"Blinking LED "<<number<<" blink" <<endl;
+
+	for (int i = 0; i<num; i++)
+	{
+		 writeLED("/brightness", "1");
+                 sleep (1);
+		 writeLED("/brightness", "0");
+		 sleep (1);
+	}
+	
+	cout << "Done blinking"<<endl;
+}	
+
 
 LED::~LED()
 {// AUTOMATICALLY CALLED 

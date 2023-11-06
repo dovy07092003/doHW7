@@ -1,9 +1,8 @@
 // Name: derek_LED.h
 //This is the header file form the makeLESs.cpp
 
-#include <iostream>
 #include <string>
-#include <fstream>
+
 using namespace std;
 
 class LED
@@ -20,5 +19,6 @@ class LED
            virtual void turnOff();
 	   virtual void flash(string delayms);
 	   virtual void outputState();
+	   virtual void blink(int num);
 	   virtual ~LED();
 };
